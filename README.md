@@ -78,3 +78,17 @@ Converts the digital measure of phase/frequency diffrence into a analog control 
 # Day-2 PLL labs and Post-Layout Simulations
 
 This day mainly focuses on the prelayout and postlayout simulations and weather they were as per our expectations or not. 
+
+## How to manipulate .cir/.spice file to get our desired output
+
+### 
+
+* 1) First we  'git clone https://github.com/lakshmi-sathi/avsdpll_1v8' this directory
+* 2) Then we change the tran parameters so that we can get the output (here, leakage current of charge pump) at 20us
+
+![Screenshot (1081)](https://user-images.githubusercontent.com/35188692/127775250-fc303770-2d6b-4d46-94ae-62acff02a9e2.png)
+
+
+* 3) Then we gave ngspice CP.cir command in the terminal to see the prelayout output waveforms of Charge Pump
+
+![Screenshot (1083)](https://user-images.githubusercontent.com/35188692/127775502-a98cdf81-8cc5-4333-8073-fa59cf8a6c7a.png)
