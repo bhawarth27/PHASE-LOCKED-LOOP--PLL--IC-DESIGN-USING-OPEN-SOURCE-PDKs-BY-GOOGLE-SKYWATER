@@ -40,20 +40,27 @@ The agenda of Day-1 was to get fimiliar with PLL and its building blocks. The in
 
 ## Introduction to PLL
 
-Phase locked loop is used to get a precise clock signal without frequency or phase noise
+Phase locked loop is a feedback system used to get a precise clock signal without frequency and phase noise. Both quartz crystal and voltage controlled oscillator (VCO) are use to generate clock signal.
+
+* Quartz crystal - generates limited range of frequencies but with high spectral purity(no to minimum of frequency and phase noise)
+* VCO - generates comparatively large range of frequencies but with poor spectral purity
+
+So the job of PLL is to provide a feedback mechanism for vco to mimic the reference clock produced by quartz crystal and in the process still maintaining the vco's property to produce high range of frequencies
 
 ![Screenshot (1067)](https://user-images.githubusercontent.com/35188692/127751553-1465a43d-2117-4b3a-a290-a2f9c40505f5.png)
-
-![Screenshot (1068)](https://user-images.githubusercontent.com/35188692/127751577-783a5904-0fa7-45bb-9dd2-b4a8a81c0ab7.png)
 
 
 ## COMPONENTS OF PLL
 
-### 1) Phase Frequency Detector 
+![Screenshot (1068)](https://user-images.githubusercontent.com/35188692/127751577-783a5904-0fa7-45bb-9dd2-b4a8a81c0ab7.png)
+
+### 1) Phase Frequency Detector
+It is used to detect the phase and frequency difference between the reference signal produces by quartz crystal and feedback signal obtained from frequency divider.
+It results in two signals 'up' and 'down' which is the indication as to speed-up or speed-down the output signal respectively. This operation can be first thought of achieving using XOR operation but the drawback with that was it can't dsitinguish weather a signal is lagging or leading. So we used phase frequency detector which is made up of two flip-flops which are triggered at negetive edges of reference and output signals respectively and a and gate to clear the flip flops.
 
 ### 2) Charge Pump
 
-Converts the digital measure of phase/frequency diffrence into a analog control signal to vcontrol voltage controlled oscillator
+Converts the digital measure of phase/frequency difference into a analog control signal to control voltage controlled oscillator. 
 
 ![Screenshot (1069)](https://user-images.githubusercontent.com/35188692/127752104-58a0c83e-132e-4866-a08b-ec44b805f3aa.png)
 
@@ -64,14 +71,18 @@ Converts the digital measure of phase/frequency diffrence into a analog control 
 ![Screenshot (1071)](https://user-images.githubusercontent.com/35188692/127752158-1f4670fb-172e-44c0-ab0a-ca28a1eca086.png)
 
 ### 3) Loop filter
+Lop filter is used to smoothen the output of charge pump and also plays a vital role in stability of PLL.
 
 ![Screenshot (939)](https://user-images.githubusercontent.com/35188692/127752245-2660aec8-66d2-47d9-a36c-5d03afa42e73.png)
 
 ### 4) Voltage controlled oscillator
 
+VCO is the main component of PLL. Only because of vco we are able to produce high range of frequencies.The most common on-chip VCO used is the ring oscillators which consists of odd number of inverters. To control the frequency of the ring oscillator we vary the current using the current starving technique. We have to take into consideration that vco is designed for that frequency range which we want for our PLL.
+
 ![Screenshot (1077)](https://user-images.githubusercontent.com/35188692/127763215-7cb48909-e2c9-41fe-bfa0-1e002a2ccbbc.png)
 
-### 5) Frequency dividoer
+### 5) Frequency divider
+It is used to divide VCO output to generate feedback clock. If the PLL is 'N' times clock multipler circuit than output of vco should be divided by that amount only.
 
 ![Screenshot (1078)](https://user-images.githubusercontent.com/35188692/127763246-0e894de9-ac72-4e10-8659-78dccd38cbd9.png)
 
@@ -161,3 +172,18 @@ The command to obtain the pre-layout simulation is:
 ### PLL:
 ![image](https://user-images.githubusercontent.com/35188692/127856494-da2e722d-c805-40c2-a8a7-b92221585616.png)
 
+# TAPEOUT
+
+Tapeout means to send our design to the fab after we prepare it with all the additional support we require.
+
+We should first connect our silicon wafer with the real world. For that we use I/O pads. Then for any kind of serial connectivity like I2C, UART and other peripherals, we should have their designs. Memory also has to be incorporated which takes a lot of space. Testing mechanisms should also be added. Taking care of all of this becomes complicated hence, we should choose a driver to enable our IP to meet the desired requirements to undergo fabrication process. For this we can use Efabless Caravel SoC template.
+
+It will provide the user project area to add our design, and we need not bother about other things on SOC.
+
+![image](https://user-images.githubusercontent.com/35188692/127879191-c62b16f6-0809-4668-b51a-fa7629a7b6d0.png)
+
+# ACKNOWLEDGEMENT
+
+I thank Mr. Kunal Ghosh, co-founder [VSD](https://www.vlsisystemdesign.com/), for providing me with this wonderful 2-day workshop.
+
+I would like to thank [Ms. Lakshmi S](https://github.com/lakshmi-sathi), for guiding throughout the workshop about how to design PLL.
