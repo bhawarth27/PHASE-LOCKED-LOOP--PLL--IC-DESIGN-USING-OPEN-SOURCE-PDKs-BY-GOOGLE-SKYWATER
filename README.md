@@ -58,6 +58,9 @@ So the job of PLL is to provide a feedback mechanism for vco to mimic the refere
 It is used to detect the phase and frequency difference between the reference signal produces by quartz crystal and feedback signal obtained from frequency divider.
 It results in two signals 'up' and 'down' which is the indication as to speed-up or speed-down the output signal respectively. This operation can be first thought of achieving using XOR operation but the drawback with that was it can't dsitinguish weather a signal is lagging or leading. So we used phase frequency detector which is made up of two flip-flops which are triggered at negetive edges of reference and output signals respectively and a and gate to clear the flip flops.
 
+![Screenshot (1091)](https://user-images.githubusercontent.com/35188692/127880901-c0e0e097-3291-4dbf-ba78-388665c4b174.png)
+
+
 ### 2) Charge Pump
 
 Converts the digital measure of phase/frequency difference into a analog control signal to control voltage controlled oscillator. 
