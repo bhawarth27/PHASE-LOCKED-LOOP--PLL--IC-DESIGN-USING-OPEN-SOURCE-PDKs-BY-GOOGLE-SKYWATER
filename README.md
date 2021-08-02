@@ -79,9 +79,32 @@ Converts the digital measure of phase/frequency diffrence into a analog control 
 
 This day mainly focuses on the prelayout and postlayout simulations and weather they were as per our expectations or not. 
 
+## PRE-LAYOUT SIMULATIONS:-
+
+Pre-layout simulation we do to check weather weather we are meeting the specifications before be actually go into the layout phase. This stage is crucial because if our circuit is not logically correct than what is the point of layout of the that circuit. These simulations are not close to real-world because we are here using ideal wires which are free from all parasitics.
+
+The command to obtain the pre-layout simulation is:
+```ngspice circuitname.cir```
+
+
+### VCO:
+
+![Screenshot (1088)](https://user-images.githubusercontent.com/35188692/127853698-5b548717-c0c4-47d9-99b5-051350b17ad3.png)
+
+
+### Frequency Divider:
+
+![image](https://user-images.githubusercontent.com/35188692/127853471-c95d6f21-7802-49db-923e-b5197ea56083.png)
+
+
+### PLL:
+
+![image](https://user-images.githubusercontent.com/35188692/127854002-1cadf739-bb94-454b-bfd9-809d8e9737a8.png)
+
+
 ## How to manipulate .cir/.spice file to get our desired output
 
-### 
+Here the task for us was to make changes in the .cir file of the perticular block to get the desired result
 
 * 1) First we  'git clone https://github.com/lakshmi-sathi/avsdpll_1v8' this directory
 * 2) Then we change the tran parameters so that we can get the output (here, leakage current of charge pump) at 20us
@@ -92,3 +115,49 @@ This day mainly focuses on the prelayout and postlayout simulations and weather 
 * 3) Then we gave ngspice CP.cir command in the terminal to see the prelayout output waveforms of Charge Pump
 
 ![Screenshot (1083)](https://user-images.githubusercontent.com/35188692/127775502-a98cdf81-8cc5-4333-8073-fa59cf8a6c7a.png)
+
+
+## LAYOUTS :-
+The command to obtain the layout is:
+```magic -T sky130A.tech circuitname.mag```
+
+### Frequency Divider:
+
+![Screenshot (1089)](https://user-images.githubusercontent.com/35188692/127854829-1920527c-e487-4a89-a453-9b188bf5a429.png)
+
+* For calculation of area of the layout we just have to draw a rectangle overlapping the layout and then enter "box" command in the magic tool's command window
+* similarly we can find area of all the blocks
+
+### VCO:
+
+![image](https://user-images.githubusercontent.com/35188692/127855527-e655f208-b6ef-4587-9ea8-12e0eed7bc4b.png)
+AREA- 57.72um square
+
+### Charge Pump:
+
+![image](https://user-images.githubusercontent.com/35188692/127855612-1466417e-3849-47b6-b295-fcf72318cbde.png)
+AREA- 132.27um square
+
+### PLL:
+
+![image](https://user-images.githubusercontent.com/35188692/127855722-314ce7bb-4440-4652-b867-b557d0d74864.png)
+AREA- 496um square
+
+## POST-LAYOUT SIMULATIONS :- 
+
+Post-layout simulation is done to check weather after after layout the circuit is meeting the specifications or not. These simulation results are much closer to real-world because layout has real wires which have finite amount of resistance,capacitance and even inductance which might as well effect our results. 
+
+The command to obtain the pre-layout simulation is:
+```ngspice circuitname.cir```
+
+### VCO:
+![Screenshot (1090)](https://user-images.githubusercontent.com/35188692/127856431-44278b88-d8b3-4d2e-9259-39aa94c5179c.png)
+
+
+### Frequency divider:
+![image](https://user-images.githubusercontent.com/35188692/127856463-d9427bd7-fac7-446d-8c88-df15e2cc4804.png)
+
+
+### PLL:
+![image](https://user-images.githubusercontent.com/35188692/127856494-da2e722d-c805-40c2-a8a7-b92221585616.png)
+
